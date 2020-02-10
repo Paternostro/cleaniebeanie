@@ -16,7 +16,8 @@ p {
   background-color: #EEE;
   margin: .5em;
   padding: .3em 0;
-  height: 7em;
+  height: 10em;
+  width: 40em;
   border-radius: 4px;
 }
 .taken li:hover {

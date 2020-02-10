@@ -16,28 +16,43 @@ import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/co
 export class TakenLijstComponent implements OnInit {
   taken = TAKEN;
   selectedTaak: Taak;
-
   constructor() { }
 
   ngOnInit(): void {
+    this.setDeadlines();
+    this.setTimeLeft();
   }
   onSelect(taak: Taak): void {
     this.selectedTaak = taak;
   }
 
-  setEndDate(timeLimit): Date {
-    const date: Date = new Date();
-    date.setDate(date.getDate() + timeLimit);
-    return date;
+  setDeadlines(): void {
+    for (const taak of this.taken) {
+      if (taak.timeLeft === 0) {
+        taak.deadline = new Date();
+        taak.deadline.setDate(taak.deadline.getDate() + taak.timeLimit)
+        console.log(taak.deadline);
+      }
+    }
   }
 
-  // oberserableTimer(timeLimit) {
-  //   const source = timer(1000, 2000);
-  //   const abc = source.subscribe(val => {
-  //     console.log(val, '-');
-  //     this.subscribeTimer = timeLimit * 24 * 60 * 60 - val;
-  //   });
-  // }
+  setTimeLeft() {
+    for (const taak of this.taken) {
+      setInterval(() => {
+        taak.timeLeft = (taak.deadline).valueOf() - (new Date()).valueOf();
+        taak.daysLeft = Math.floor(taak.timeLeft / 1000 / 60 / 60 / 24);
+        taak.hoursLeft = Math.floor(taak.timeLeft / 1000 / 60 / 60 - (taak.daysLeft * 24));
+        taak.minutesLeft = Math.floor(taak.timeLeft / 1000 / 60 - (taak.hoursLeft * 60) - (taak.daysLeft * 24 * 60));
+        // console.log(taak.deadline, taak.deadline.valueOf());
+        // const d: Date = new Date();
+        // console.log(d, d.valueOf());
+        console.log(taak.timeLeft / 60 / 60 / 1000);
+      }, 1000);
+    }
+
+  }
+
+
 }
 
 

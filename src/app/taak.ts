@@ -22,6 +22,11 @@
 export interface Taak {
   name: string;
   timeLimit: number;
+  deadline: any;
+  timeLeft: number;
+  daysLeft: number;
+  hoursLeft: number;
+  minutesLeft: number;
   effort: number;
   description: string;
 }

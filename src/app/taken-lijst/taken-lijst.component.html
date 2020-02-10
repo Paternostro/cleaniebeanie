@@ -4,11 +4,9 @@
       [class.selected]="taak === selectedTaak"
       (click)="onSelect(taak)">
     <span class="badge">{{taak.name}}</span>
-
-    <p>
-      <script> setEndDate(taak.timeLimit) </script>
-    </p>
-
+    <p> Deadline: {{taak.deadline}}</p>
+    <p> {{taak.daysLeft}} dagen, {{taak.hoursLeft}} uur en {{taak.minutesLeft}} minuten tot degene met het minst
+      punten de bitch is.</p>
     <p> Effort: {{taak.effort}}</p>
   </li>
 </ul>
