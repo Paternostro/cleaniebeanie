@@ -1,0 +1,24 @@
+<h2>Azaleataakies</h2>
+<ul class="taken">
+  <li *ngFor="let taak of taken"
+      [class.selected]="taak === selectedTaak"
+      (click)="onSelect(taak)">
+    <span class="badge">{{taak.name}}</span>
+
+    <p>
+      <script> setEndDate(taak.timeLimit) </script>
+    </p>
+
+    <p> Effort: {{taak.effort}}</p>
+  </li>
+</ul>
+
+<div *ngIf="selectedTaak">
+
+  <h2>{{selectedTaak.name}} houdt in: </h2>
+  <div>
+    {{selectedTaak.description}}
+  </div>
+
+</div>
+
