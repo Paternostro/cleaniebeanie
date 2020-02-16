@@ -3,6 +3,41 @@ p {
 
 }
 
+:root {
+  /* :root is a clever way of saying "the outer-most element" */
+
+  --done-undone: #838e6d; /* the default */
+}
+
+.button {
+  background-color: #dac680;
+}
+
+.description{
+  margin: 0 0 2em 0;
+  background-color: darkcyan;
+  margin-right: .8em;
+  border: #8e001c;
+  padding: 0;
+  width: 40em;
+  height: 10em;
+  border-radius: 20px 0 10px 4px;
+}
+
+.description .badge{
+  display: inline-block;
+  font-size: small;
+  padding: 0.7em 0.7em 0.7em;
+  background-color:#405061;
+  line-height: 1em;
+  position: center;
+  bottom: auto;
+  height: 2.8em;
+  margin-right: .8em;
+  border-radius: 20px 0 10px 4px;
+  font-size: large;
+}
+
 .taken {
   margin: 0 0 2em 0;
   list-style-type: none;
@@ -13,12 +48,12 @@ p {
   cursor: pointer;
   position: relative;
   left: 0;
-  background-color: #EEE;
+  background-color: var(--done-undone);
   margin: .5em;
   padding: .3em 0;
-  height: 10em;
+  height: 14em;
   width: 40em;
-  border-radius: 4px;
+  border-radius: 20px 0 10px 4px;
 }
 .taken li:hover {
   color: #607D8B;
@@ -41,8 +76,8 @@ p {
   line-height: 1em;
   position: center;
   bottom: auto;
-  height: 1.8em;
+  height: 2.8em;
   margin-right: .8em;
-  border-radius: 4px 0 0 4px;
+  border-radius: 20px 0 10px 4px;
   font-size: large;
 }

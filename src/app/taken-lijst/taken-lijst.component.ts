@@ -16,14 +16,36 @@ import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/co
 export class TakenLijstComponent implements OnInit {
   taken = TAKEN;
   selectedTaak: Taak;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     // this.setDeadlines();
     this.setTimeLeft();
+    this.orderTaken();
   }
   onSelect(taak: Taak): void {
     this.selectedTaak = taak;
+  }
+
+  getColorOfTask(taak: Taak): string {
+    if (taak.finished) {
+      return 'green';
+    } else {
+      let red = '80';
+      const hoursLeft = taak.timeLeft / 1000 / 60 / 60;
+      console.log('days left: ' + hoursLeft / 24);
+      let green;
+      if (hoursLeft / 24 > 14) {
+        red = '45';
+        green = '80';
+      } else {
+        green = (Math.ceil((hoursLeft / (taak.timeLimit * 24)) * 80)).toString(16);
+        console.log('green: ' + green);
+      }
+      const blue = '00';
+      console.log('#' + red + green + blue);
+      return '#' + red + green + blue;
+    }
   }
 
   findDayDifference(taak: Taak): number {
@@ -70,9 +92,16 @@ export class TakenLijstComponent implements OnInit {
     if (taak.deadline_time !== null) {
       const dayDifference = this.findDayDifference(taak);
       taak.deadline.setDate(taak.deadline.getDate() - dayDifference);
-      taak.deadline.setHours(taak.deadline_time[1])
+      taak.deadline.setHours(taak.deadline_time[1]);
     }
+    taak.finished = false;
 
+  }
+
+  orderTaken() {
+    setInterval( () => {
+      this.taken.sort((a, b) => (a.timeLeft > b.timeLeft) ? 1 : -1);
+    }, 10000);
   }
 
   setTimeLeft() {

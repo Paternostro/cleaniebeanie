@@ -1,12 +1,14 @@
 <h2>Azaleataakies</h2>
-<button (click)="setDeadlines()" type="button">Set Deadlines</button>
+<button class="button" (click)="setDeadlines()" type="button">Set Deadlines</button>
 <ul class="taken">
   <li *ngFor="let taak of taken"
       [class.selected]="taak === selectedTaak"
-      (click)="onSelect(taak)">
+      (click)="onSelect(taak)"
+      [ngStyle]="{'backgroundColor': getColorOfTask(taak)}">
     <span class="badge">{{taak.name}}</span>
-    <button (click)="setDeadline(taak)" type="button">Set Deadline</button>
-    <button (click)="switchDoneUndone(taak)" type="button"> Done/Undone</button>
+    <p></p>
+    <button class="button" (click)="setDeadline(taak)" type="button">Set Deadline </button>
+    <button class="button" (click)="switchDoneUndone(taak)" type="button"> Done/Undone</button>
     <p> Deadline: {{taak.deadline}}</p>
     <p> {{taak.daysLeft}} dagen, {{taak.hoursLeft}} uur en {{taak.minutesLeft}} minuten tot degene met het minst
       punten de bitch is.</p>
@@ -16,8 +18,9 @@
 
 <div *ngIf="selectedTaak">
 
-  <h2>{{selectedTaak.name}} houdt in: </h2>
-  <div>
+  <div class="description">
+    <span class="badge">{{selectedTaak.name}}:</span>
+    <p></p>
     {{selectedTaak.description}}
   </div>
 
