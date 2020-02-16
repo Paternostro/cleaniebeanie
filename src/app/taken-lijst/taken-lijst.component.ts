@@ -48,6 +48,8 @@ export class TakenLijstComponent implements OnInit {
     }
   }
 
+  /* Deze functie vind de dichstbijzijnde specifieke dag vanaf een bepaald punt.
+   */
   findDayDifference(taak: Taak): number {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let dayDifference = 0;
