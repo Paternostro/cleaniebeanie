@@ -19,14 +19,18 @@
 //   }
 // ];
 
+import DateTimeFormat = Intl.DateTimeFormat;
+
 export interface Taak {
   name: string;
   timeLimit: number;
   deadline: any;
+  deadline_time: [string, number]; // day of week, hour of day
   timeLeft: number;
   daysLeft: number;
   hoursLeft: number;
   minutesLeft: number;
   effort: number;
   description: string;
+  finished: boolean;
 }

@@ -19,21 +19,60 @@ export class TakenLijstComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.setDeadlines();
+    // this.setDeadlines();
     this.setTimeLeft();
   }
   onSelect(taak: Taak): void {
     this.selectedTaak = taak;
   }
 
+  findDayDifference(taak: Taak): number {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let dayDifference = 0;
+    let day = days[taak.deadline.getDay()];
+    let idx = 0;
+    while (day !== taak.deadline_time[0]) {
+      if (idx === 0) {
+        idx = 6;
+        dayDifference += 1;
+      } else {
+        idx -= 1;
+        dayDifference += 1;
+      }
+      day = days[idx];
+    }
+    return dayDifference;
+  }
+
+  switchDoneUndone(taak: Taak): void {
+    if (taak.finished) {
+      taak.finished = false;
+    } else {
+      taak.finished = true;
+    }
+  }
+
   setDeadlines(): void {
     for (const taak of this.taken) {
       if (taak.timeLeft === 0) {
-        taak.deadline = new Date();
-        taak.deadline.setDate(taak.deadline.getDate() + taak.timeLimit)
-        console.log(taak.deadline);
+        this.setDeadline(taak);
       }
     }
+  }
+
+  setDeadline(taak: Taak): void {
+    taak.deadline = new Date();
+    taak.deadline.setDate(taak.deadline.getDate() + taak.timeLimit);
+    taak.deadline.setHours(22);
+    taak.deadline.setMinutes(0);
+    taak.deadline.setSeconds(0);
+    // Sommige taken moeten op een specifieke dag. Hier wordt ervoor gezorgd dat de deadline op die dag (en evt. tijd komt te staan)
+    if (taak.deadline_time !== null) {
+      const dayDifference = this.findDayDifference(taak);
+      taak.deadline.setDate(taak.deadline.getDate() - dayDifference);
+      taak.deadline.setHours(taak.deadline_time[1])
+    }
+
   }
 
   setTimeLeft() {

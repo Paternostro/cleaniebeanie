@@ -1,9 +1,12 @@
 <h2>Azaleataakies</h2>
+<button (click)="setDeadlines()" type="button">Set Deadlines</button>
 <ul class="taken">
   <li *ngFor="let taak of taken"
       [class.selected]="taak === selectedTaak"
       (click)="onSelect(taak)">
     <span class="badge">{{taak.name}}</span>
+    <button (click)="setDeadline(taak)" type="button">Set Deadline</button>
+    <button (click)="switchDoneUndone(taak)" type="button"> Done/Undone</button>
     <p> Deadline: {{taak.deadline}}</p>
     <p> {{taak.daysLeft}} dagen, {{taak.hoursLeft}} uur en {{taak.minutesLeft}} minuten tot degene met het minst
       punten de bitch is.</p>
